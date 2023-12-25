@@ -1,4 +1,4 @@
-package com.mahfuz.codeshare;
+package com.mahfuz.codeshare.utils;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

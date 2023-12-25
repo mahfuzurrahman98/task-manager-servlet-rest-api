@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mahfuz.codeshare.models.User;
-import com.mahfuz.codeshare.services.DBConnection;
+import com.mahfuz.codeshare.utils.Database;
 
 public class UserDAO {
 	private Connection conn = null;
 
 	public UserDAO() throws IOException {
-		conn = DBConnection.getConnection();
+		conn = Database.getConnection();
 	}
 
 	public User checkLogin(String username, String password) {
@@ -30,10 +30,7 @@ public class UserDAO {
 				user = new User(
 						rs.getInt("id"),
 						rs.getString("name"),
-						rs.getString("username"),
 						rs.getString("email"),
-						rs.getString("created_at"),
-						rs.getString("updated_at"),
 						rs.getInt("status"));
 			}
 		} catch (SQLException e) {
@@ -56,10 +53,7 @@ public class UserDAO {
 						new User(
 								rs.getInt("id"),
 								rs.getString("name"),
-								rs.getString("username"),
 								rs.getString("email"),
-								rs.getString("created_at"),
-								rs.getString("updated_at"),
 								rs.getInt("status")));
 			}
 		} catch (SQLException e) {
