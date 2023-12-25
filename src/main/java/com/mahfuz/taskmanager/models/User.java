@@ -1,6 +1,6 @@
-package com.mahfuz.codeshare.models;
+package com.mahfuz.taskmanager.models;
 
-import com.mahfuz.codeshare.utils.DateProcessing;
+import com.mahfuz.taskmanager.utils.DateProcessing;
 
 public class User {
 

@@ -1,4 +1,4 @@
-package com.mahfuz.codeshare.servlets;
+package com.mahfuz.taskmanager.servlets;
 
 import jakarta.servlet.annotation.WebServlet;
 

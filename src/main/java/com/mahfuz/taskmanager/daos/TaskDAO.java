@@ -1,4 +1,4 @@
-package com.mahfuz.codeshare.daos;
+package com.mahfuz.taskmanager.daos;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.mahfuz.codeshare.models.Task;
-import com.mahfuz.codeshare.utils.Database;
+import com.mahfuz.taskmanager.models.Task;
+import com.mahfuz.taskmanager.utils.Database;
 
 public class TaskDAO {
   private Connection conn = null;

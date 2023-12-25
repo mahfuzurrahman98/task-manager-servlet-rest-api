@@ -1,10 +1,8 @@
-package com.mahfuz.codeshare.servlets;
+package com.mahfuz.taskmanager.servlets;
 
 import java.io.IOException;
 
-// import com.mahfuz.codeshare.daos.LanguageDAO;
-// import com.mahfuz.codeshare.models.Language;
-import com.mahfuz.codeshare.utils.JSON;
+import com.mahfuz.taskmanager.utils.JSON;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

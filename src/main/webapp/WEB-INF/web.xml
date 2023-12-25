@@ -6,7 +6,7 @@
     <!-- LoginService -->
     <!-- <servlet>
         <servlet-name>LoginService</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.services.LoginService</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.services.LoginService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginService</servlet-name>
@@ -16,7 +16,7 @@
     <!-- SourceCodeService -->
     <!-- <servlet>
         <servlet-name>SourceCodeService</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.services.SourceCodeService</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.services.SourceCodeService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SourceCodeService</servlet-name>
@@ -26,7 +26,7 @@
     <!-- Home -->
     <!-- <servlet>
         <servlet-name>Home</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.Home</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.Home</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -36,7 +36,7 @@
     <!-- Library -->
     <!-- <servlet>
         <servlet-name>Library</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.Library</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.Library</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Library</servlet-name>
@@ -46,7 +46,7 @@
     <!-- Login -->
     <!-- <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.Login</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -56,7 +56,7 @@
     <!-- Logout -->
     <!-- <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.Logout</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -66,7 +66,7 @@
     <!-- Paste -->
     <!-- <servlet>
         <servlet-name>Paste</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.Paste</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.Paste</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Paste</servlet-name>
@@ -76,7 +76,7 @@
     <!-- Register -->
     <!-- <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.Register</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.Register</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -86,7 +86,7 @@
     <!-- SharedCode -->
     <!-- <servlet>
         <servlet-name>SharedCode</servlet-name>
-        <servlet-class>com.mahfuz.codeshare.servlets.SharedCode</servlet-class>
+        <servlet-class>com.mahfuz.taskmanager.servlets.SharedCode</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SharedCode</servlet-name>
