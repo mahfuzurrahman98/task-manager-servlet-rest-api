@@ -45,20 +45,19 @@ public class TaskServlet extends HttpServlet {
 				return;
 			}
 
-			// if user_id is not a number or is not present in the jsonData or is empty
-			// then return error
 			if (!jsonData.containsKey("user_id") || !(jsonData.get("user_id") instanceof Number)) {
 				JSON.respond(response, 400, "Invalid user_id");
 				return;
 			}
 
-			// now check that the user_id has any existing task with the same title
-			// if yes, then return error
-			// if no, then create the task
 			TaskDAO taskDao = new TaskDAO();
-			int userId = Integer.parseInt(jsonData.get("user_id").toString());
-			Task existingTask = taskDao.getByUserIdAndTitle(
-					userId,
+			// print the type of jsonData.get("user_id")
+			System.out.println("Type:" + jsonData.get("user_id").getClass().getName()); // so its a java.lang.Double and not a
+																																									// java.lang.Integer so we need to
+																																									// cast it to int
+			int userId = ((Number) jsonData.get("user_id")).intValue();
+
+			Task existingTask = taskDao.getByUserIdAndTitle(userId,
 					jsonData.get("title").toString());
 			if (existingTask != null) {
 				JSON.respond(response, 409, "Task with the same title already exists");
@@ -69,8 +68,13 @@ public class TaskServlet extends HttpServlet {
 			Task task = new Task(
 					jsonData.get("title").toString(),
 					jsonData.get("description").toString(),
-					Integer.parseInt(jsonData.get("user_id").toString()));
-			JSON.respond(response, 200, "Task created successfully", jsonData);
+					userId);
+			task = taskDao.create(task);
+			task.setTitle(null);
+			System.out.println(
+					"Task created with id: " + task.getId() + " and title: " + task.getTitle() + "at: " + task.getCreatedAt()
+							+ " and updated at: " + task.getUpdatedAt());
+			JSON.respond(response, 200, "Task created successfully", task);
 		} catch (Exception e) {
 			// Handle the exception
 			e.printStackTrace();

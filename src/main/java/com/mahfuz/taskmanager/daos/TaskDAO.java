@@ -22,7 +22,8 @@ public class TaskDAO implements DAO<Task> {
     try {
       String sql = "INSERT INTO tasks (title, description, status, user_id) VALUES (?, ?, ?, ?)";
 
-      // Use PreparedStatement.RETURN_GENERATED_KEYS to get the auto-generated ID
+      // Use PreparedStatement.RETURN_GENERATED_KEYS to get the auto-incremented id,
+      // created_at, and updated_at values
       PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
       stmt.setString(1, task.getTitle());
       stmt.setString(2, task.getDescription());
@@ -33,14 +34,11 @@ public class TaskDAO implements DAO<Task> {
       // Retrieve the generated keys (ID)
       ResultSet generatedKeys = stmt.getGeneratedKeys();
       if (generatedKeys.next()) {
-        // Set the generated ID, created_at, and updated_at values to the Task object
         int taskId = generatedKeys.getInt(1);
-        // taskCreatedAt is a timestamp in the database, we need it as a string
-        String taskCreatedAt = generatedKeys.getTimestamp("created_at").toString();
-
         task.setId(taskId);
-        task.setCreatedAt(taskCreatedAt);
-        task.setUpdatedAt("");
+
+        // Get the created_at and updated_at values
+        task = this.get(taskId);
       }
 
     } catch (SQLException e) {
@@ -59,10 +57,7 @@ public class TaskDAO implements DAO<Task> {
       ResultSet rs = stmt.executeQuery();
 
       while (rs.next()) {
-        Task curTask = new Task(
-            rs.getString("title"),
-            rs.getString("description"),
-            rs.getInt("user_id"));
+        Task curTask = new Task(rs.getString("title"), rs.getString("description"), rs.getInt("user_id"));
         curTask.setId(rs.getInt("id"));
         curTask.setStatus(rs.getInt("status"));
         curTask.setCreatedAt(rs.getTimestamp("created_at").toString());
@@ -87,14 +82,11 @@ public class TaskDAO implements DAO<Task> {
       ResultSet rs = stmt.executeQuery();
 
       while (rs.next()) {
-        task = new Task(
-            rs.getString("title"),
-            rs.getString("description"),
-            rs.getInt("user_id"));
+        task = new Task(rs.getString("title"), rs.getString("description"), rs.getInt("user_id"));
         task.setId(rs.getInt("id"));
         task.setStatus(rs.getInt("status"));
         task.setCreatedAt(rs.getTimestamp("created_at").toString());
-        task.setUpdatedAt(rs.getTimestamp("updated_at").toString());
+        task.setUpdatedAt(rs.getTimestamp("updated_at") == null ? "" : rs.getTimestamp("updated_at").toString());
       }
     } catch (SQLException e) {
       System.out.println("DAO Error");
@@ -150,10 +142,7 @@ public class TaskDAO implements DAO<Task> {
       ResultSet rs = stmt.executeQuery();
 
       while (rs.next()) {
-        Task curTask = new Task(
-            rs.getString("title"),
-            rs.getString("description"),
-            rs.getInt("user_id"));
+        Task curTask = new Task(rs.getString("title"), rs.getString("description"), rs.getInt("user_id"));
         curTask.setId(rs.getInt("id"));
         curTask.setStatus(rs.getInt("status"));
         curTask.setCreatedAt(rs.getTimestamp("created_at").toString());
@@ -178,14 +167,11 @@ public class TaskDAO implements DAO<Task> {
       ResultSet rs = stmt.executeQuery();
 
       while (rs.next()) {
-        task = new Task(
-            rs.getString("title"),
-            rs.getString("description"),
-            rs.getInt("user_id"));
+        task = new Task(rs.getString("title"), rs.getString("description"), rs.getInt("user_id"));
         task.setId(rs.getInt("id"));
         task.setStatus(rs.getInt("status"));
         task.setCreatedAt(rs.getTimestamp("created_at").toString());
-        task.setUpdatedAt(rs.getTimestamp("updated_at").toString());
+        task.setUpdatedAt(rs.getTimestamp("updated_at") == null ? "" : rs.getTimestamp("updated_at").toString());
       }
     } catch (SQLException e) {
       System.out.println("DAO Error");

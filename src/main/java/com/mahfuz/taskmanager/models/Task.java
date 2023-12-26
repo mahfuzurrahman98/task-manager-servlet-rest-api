@@ -10,7 +10,6 @@ public class Task {
   private int user_id;
 
   public Task(String title, String description, int user_id) {
-    // this.id = id;
     this.title = title;
     this.description = description;
     this.user_id = user_id;
