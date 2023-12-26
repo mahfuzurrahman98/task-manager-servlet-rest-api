@@ -1,7 +1,5 @@
 package com.mahfuz.taskmanager.models;
 
-import com.mahfuz.taskmanager.utils.DateProcessing;
-
 public class Task {
   private int id;
   private String title;
@@ -11,13 +9,13 @@ public class Task {
   private int status;
   private int user_id;
 
-  public Task(int id, String title, String description, int status, int user_id) {
-    this.id = id;
+  public Task(String title, String description, int user_id) {
+    // this.id = id;
     this.title = title;
     this.description = description;
     this.user_id = user_id;
-    this.status = status;
-    this.created_at = new DateProcessing().getCurTimestamp().toString();
+    this.status = 1;
+    this.created_at = "";
     this.updated_at = "";
   }
 
