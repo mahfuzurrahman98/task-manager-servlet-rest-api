@@ -121,14 +121,13 @@ public class TaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Get the JSON data from the request body
+            // Get the JSON data FROM the request body
             HashMap<String, Object> jsonData = JSON.read(request);
 
             if (jsonData == null) {
                 JSON.respond(response, 400, "Invalid JSON data");
                 return;
             }
-            System.out.println("Type:" + jsonData.get("user_id").getClass().getName());
 
             // lets validate the input data
 
@@ -181,11 +180,6 @@ public class TaskServlet extends HttpServlet {
                     jsonData.get("description").toString(),
                     userId);
             task = this.taskDao.create(task);
-            task.setTitle(null);
-            System.out.println(
-                    "Task created with id: " + task.getId() + " and title: " + task.getTitle() + "at: "
-                            + task.getCreatedAt()
-                            + " and updated at: " + task.getUpdatedAt());
             JSON.respond(response, 200, "Task created successfully", task);
         } catch (Exception e) {
             // Handle the exception
@@ -207,7 +201,7 @@ public class TaskServlet extends HttpServlet {
             }
             System.out.println("id: " + id);
 
-            // Get the JSON data from the request body
+            // Get the JSON data FROM the request body
             HashMap<String, Object> jsonData = JSON.read(request);
 
             if (jsonData == null) {
@@ -264,7 +258,7 @@ public class TaskServlet extends HttpServlet {
                 JSON.respond(response, 409, "Task with the same title already exists");
                 return;
             }
-            
+
             task = this.taskDao.update(id, task);
             JSON.respond(response, 200, "Task updated successfully", task);
         } catch (SQLException e) {

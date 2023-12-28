@@ -48,6 +48,8 @@ public class JSON {
     responseMap.put("message", message);
     if (data != null) {
       responseMap.put("data", data);
+      System.out.println("data is not null");
+      System.out.println(data);
     }
 
     Gson gson = new Gson();

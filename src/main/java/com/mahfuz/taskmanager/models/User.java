@@ -1,24 +1,32 @@
 package com.mahfuz.taskmanager.models;
 
-import com.mahfuz.taskmanager.utils.DateProcessing;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mahfuz.taskmanager.daos.TaskDAO;
 
 public class User {
 
 	private int id;
 	private String name;
 	private String email;
+	private String password;
 	private String created_at;
 	private String updated_at;
 	private int status;
 
-	public User(int id, String name, String email, int status) {
-		super();
-		this.id = id;
+	public User(String name, String email) {
+		this(name, email, "");
+	}
+
+	public User(String name, String email, String password) {
 		this.name = name;
 		this.email = email;
-		this.created_at = new DateProcessing().getCurTimestamp().toString();
+		this.password = password;
+		this.created_at = "";
 		this.updated_at = "";
-		this.status = status;
+		this.status = 1;
 	}
 
 	public void setId(int id) {
@@ -45,6 +53,14 @@ public class User {
 		return email;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
 	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;
 	}
@@ -69,11 +85,14 @@ public class User {
 		return status;
 	}
 
-	// now the User might have a 0, 1, or more than 1 tasks, So we need to make
-	// sometihg so that when calling a user we get the tasks as well
-
-	// public ArrayList<Task> getTasks() {
-	// 	TaskDAO taskDao = new TaskDAO();
-	// 	return taskDao.getTasksByUserId(this.id);
-	// }
+	public ArrayList<Task> getTasks() throws IOException {
+		TaskDAO taskDao = new TaskDAO();
+		ArrayList<Task> tasks = null;
+		try {
+			tasks = taskDao.getByUserId(this.id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tasks;
+	}
 }
