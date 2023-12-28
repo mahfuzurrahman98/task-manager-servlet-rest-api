@@ -18,9 +18,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// allow for delete and put requests I mean tasks/1, tasks/2 etc
-
-// @WebServlet(name = "TaskServlet", urlPatterns = { "/tasks", "/tasks/*" })
 @WebServlet(name = "TaskServlet", urlPatterns = { "/tasks", "/tasks/*", "/tasks/user/*" })
 public class TaskServlet extends HttpServlet {
     private String baseURL = "/taskmanager/tasks";
@@ -262,6 +259,12 @@ public class TaskServlet extends HttpServlet {
                 task.setStatus(((Number) jsonData.get("status")).intValue());
             }
 
+            Task conflictingTask = this.taskDao.getByUserIdAndTitle(task.getUserId(), task.getTitle());
+            if (conflictingTask != null && conflictingTask.getId() != task.getId()) {
+                JSON.respond(response, 409, "Task with the same title already exists");
+                return;
+            }
+            
             task = this.taskDao.update(id, task);
             JSON.respond(response, 200, "Task updated successfully", task);
         } catch (SQLException e) {
@@ -284,7 +287,7 @@ public class TaskServlet extends HttpServlet {
             } catch (Exception e) {
                 throw new CustomHttpException(404, "The requsted resource was not found");
             }
-            
+
             // delete the task
             Task task = this.taskDao.get(id);
             if (task == null) {
