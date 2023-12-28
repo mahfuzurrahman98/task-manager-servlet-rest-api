@@ -13,23 +13,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JSON {
-  public static HashMap<String, Object> read(HttpServletRequest request) {
+  public static HashMap<String, Object> read(HttpServletRequest request) throws IOException {
     HashMap<String, Object> jsonData = null;
     try {
       BufferedReader reader = request.getReader();
       String jsonString = reader.lines().collect(Collectors.joining());
-      System.out.println(jsonString);
+
       // now make the json string to hashmap and return it
       jsonString = jsonString.replace("\\", "");
-      System.out.println(jsonString);
       Gson gson = new Gson();
-      // jsonData = gson.fromJson(jsonString, HashMap.class);
+
       jsonData = gson.fromJson(jsonString, new TypeToken<HashMap<String, Object>>() {
       }.getType());
 
       reader.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new CustomHttpException(500, e.getMessage());
     }
 
     return jsonData;

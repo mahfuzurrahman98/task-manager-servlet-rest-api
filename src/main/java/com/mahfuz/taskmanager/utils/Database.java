@@ -30,6 +30,7 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Db errors\n");
+			throw new CustomHttpException(500, e.getMessage());
 		}
 		return conn;
 	}
