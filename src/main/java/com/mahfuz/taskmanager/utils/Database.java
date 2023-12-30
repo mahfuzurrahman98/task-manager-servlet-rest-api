@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class Database {
 
 	private Database() {
@@ -14,18 +16,14 @@ public class Database {
 	public static Connection getConnection() throws IOException {
 		try {
 			if (conn == null || conn.isClosed()) {
-				// Properties props = new Properties();
-				// try (InputStream input =
-				// Database.class.getClassLoader().getResourceAsStream("config.properties")) {
-				// props.load(input);
-				// }
+				Dotenv dotenv = Dotenv.configure().load();
+				String dbUrl = dotenv.get("DB_URL");
+				String dbUsername = dotenv.get("DB_USERNAME");
+				String dbPassword = dotenv.get("DB_PASSWORD");
 
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				// conn = DriverManager.getConnection(
-				// props.getProperty("db.url"),
-				// props.getProperty("db.username"),
-				// props.getProperty("db.password"));
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/taskmanager", "root", "pass9859");
+
+				conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
